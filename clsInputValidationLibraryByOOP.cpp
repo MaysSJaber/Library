@@ -1,37 +1,42 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include"clsDate.h"
-#include "clsUtil.h"
-class clsInputValidation
+#include <iostream>
+#include <string>
+#include "clsString.h"
+#include "clsDate.h"
+
+class clsInputValidate
 {
+
 public:
-	static bool IsNumberBetween(int Number, int From, int To) {
 
-		return  (Number >= From && Number <= To);
-	}
-	static bool IsNumberBetween(double Number, double From, double To) {
-
-		return  (Number >= From && Number <= To);
-	}
-	static bool IsNumberBetween(float Number, float From, float To) {
-
-		return  (Number >= From && Number <= To);
-	}
-	static bool IsNumberBetween(long  Number, long From, long  To) {
-
-		return  (Number >= From && Number <= To);
-	}
-	static bool IsNumberBetween(long long  Number, long long From, long long  To) {
-
-		return  (Number >= From && Number <= To);
-	}
-	static bool IsNumberBetween(short  Number, short From, short  To) {
-
-		return  (Number >= From && Number <= To);
+	static bool IsNumberBetween(short Number, short From, short To)
+	{
+		if (Number >= From && Number <= To)
+			return true;
+		else
+			return false;
 	}
 
-	static bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate) {
+	static bool IsNumberBetween(int Number, int From, int To)
+	{
+		if (Number >= From && Number <= To)
+			return true;
+		else
+			return false;
+
+	}
+
+	
+
+	static bool IsNumberBetween(double Number, double From, double To)
+	{
+		if (Number >= From && Number <= To)
+			return true;
+		else
+			return false;
+	}
+
+static bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate) {
 
 		if (FromDate.IsDateAfterDate2(ToDate)) {
 
@@ -66,6 +71,28 @@ public:
 		return Number;
 	}
 
+	static double ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		float Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+
+	static double ReadFloatNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	{
+		float Number = ReadFloatNumber();
+
+		while (!IsNumberBetween(Number, From, To)) {
+			cout << ErrorMessage;
+			Number = ReadDblNumber();
+		}
+		return Number;
+	}
+
 	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		double Number;
@@ -93,6 +120,13 @@ public:
 		return	clsDate::IsValidDate(Date);
 	}
 
+	static string ReadString()
+	{
+		string  S1="";
+	
+		getline(cin >> ws, S1);
+		return S1;
+	}
 };
 //Eng .MaysJaber
 ////Don't Repeat Yourself - DRY

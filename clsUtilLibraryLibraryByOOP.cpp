@@ -208,7 +208,6 @@ public:
 		for (int i = 1; i < NumberOfTabs; i++)
 		{
 			t = t + "\t";
-			cout << t;
 		}
 		return t;
 
